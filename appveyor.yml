@@ -1,0 +1,46 @@
+shallow_clone: true
+version: '{build}'
+skip_tags: true
+environment:
+  matrix:
+    -
+      nodejs_version: '5'
+      npm_version: '3.4.0'
+      another_npm_version: '3.3.12'
+    -
+      nodejs_version: '0'
+      npm_version: '2.14.10'
+      another_npm_version: '2.13.5'
+    -
+      nodejs_version: '0.10'
+      npm_version: '1.4.27'
+      another_npm_version: '1.4.26'
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - 'npm --version # Original npm version'
+  - npm install --global npm@%npm_version%
+  - set PATH=%APPDATA%\npm;%PATH%
+  - 'npm --version # User-installed npm version'
+  - >-
+      node -e "
+      var fs = require('fs');
+      var pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+      var devDeps = pkg.devDependencies;
+      delete devDeps['@shinnn/eslint-config-node-legacy'];
+      delete devDeps.eslint;
+      fs.writeFileSync('package.json', JSON.stringify(pkg));"
+  - npm install
+matrix:
+  fast_finish: true
+build: off
+test_script:
+  - node tests\no-npm.js
+  - npm config get prefix --global
+  - node tests\has-user-npm.js
+  - npm config set prefix --global tmp
+  - npm config get prefix --global
+  - node tests\no-user-npm.js
+  - npm install --global npm@%another_npm_version%
+  - node tests\customized-npm-prefix.js
+  - node tests\broken-cli-file.js
+cache: node_modules -> package.json

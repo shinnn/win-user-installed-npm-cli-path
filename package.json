@@ -1,0 +1,43 @@
+{
+  "name": "win-user-installed-npm-cli-path",
+  "version": "1.0.0",
+  "description": "Resolve the path of `npm-cli.js` included in the user-installed npm on Windows",
+  "repository": "shinnn/win-user-installed-npm-cli-path",
+  "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+  "scripts": {
+    "pretest": "eslint --config @shinnn/node-legacy index.js tests",
+    "test": "node tests/non-windows.js && node tests/no-npm.js"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "npm",
+    "npm-cli",
+    "path",
+    "resolve",
+    "find",
+    "exe",
+    "executable",
+    "find",
+    "promise",
+    "promises",
+    "then",
+    "async",
+    "asynchronous",
+    "asynchronously"
+  ],
+  "dependencies": {
+    "graceful-fs": "^4.1.2",
+    "pinkie-promise": "^2.0.0"
+  },
+  "devDependencies": {
+    "@shinnn/eslint-config-node-legacy": "^1.0.0",
+    "eslint": "^1.9.0",
+    "pify": "^2.3.0",
+    "pretend-platform": "^1.0.0",
+    "semver": "^5.0.3",
+    "tape": "^4.2.2"
+  }
+}
