@@ -7,6 +7,12 @@ environment:
       nodejs_version: '5'
       npm_version: '3.4.0'
       another_npm_version: '3.3.12'
+      COVERALLS_REPO_TOKEN:
+        secure: KeN37NXWmMhEHWGb0U4ZbtVf+CgmcdLts/HmKS6yRqDI6WNflrSyjgXwXy3HR2Oe
+      COVERALLS_SERVICE_NAME: AppVeyor
+      COVERALLS_SERVICE_JOB_ID: '%APPVEYOR_JOB_ID%'
+      COVERALLS_GIT_BRANCH: '%APPVEYOR_REPO_BRANCH%'
+      COVERALLS_GIT_COMMIT: '%APPVEYOR_REPO_COMMIT%'
     -
       nodejs_version: '0'
       npm_version: '2.14.10'
@@ -34,13 +40,16 @@ matrix:
   fast_finish: true
 build: off
 test_script:
-  - node tests\no-npm.js
+  - node node_modules\istanbul\lib\cli.js cover --dir=cov0 tests\non-windows.js
+  - node node_modules\istanbul\lib\cli.js cover --dir=cov1 tests\no-npm.js
   - npm config get prefix --global
-  - node tests\has-user-npm.js
+  - node node_modules\istanbul\lib\cli.js cover --dir=cov2 tests\has-user-npm.js
   - npm config set prefix --global tmp
   - npm config get prefix --global
-  - node tests\no-user-npm.js
+  - node node_modules\istanbul\lib\cli.js cover --dir=cov3 tests\no-user-npm.js
   - npm install --global npm@%another_npm_version%
-  - node tests\customized-npm-prefix.js
-  - node tests\broken-cli-file.js
+  - node node_modules\istanbul\lib\cli.js cover --dir=cov4 tests\customized-npm-prefix.js
+  - node node_modules\istanbul\lib\cli.js cover --dir=cov5 tests\broken-cli-file.js
+on_success:
+  - ps: If ($env:COVERALLS_REPO_TOKEN) {Invoke-Expression 'npm run-script coveralls'}
 cache: node_modules -> package.json
