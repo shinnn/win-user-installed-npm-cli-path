@@ -4,8 +4,8 @@
 [![Build Status](https://travis-ci.org/shinnn/win-user-installed-npm-cli-path.svg?branch=master)](https://travis-ci.org/shinnn/win-user-installed-npm-cli-path)
 [![Build status](https://ci.appveyor.com/api/projects/status/2sp4jxe2rp48lnk2/branch/master?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/win-user-installed-npm-cli-path/branch/master)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/win-user-installed-npm-cli-path.svg)](https://coveralls.io/github/shinnn/win-user-installed-npm-cli-path)
-[![Dependency Status](https://img.shields.io/david/shinnn/win-user-installed-npm-cli-path.svg?label=deps)](https://david-dm.org/shinnn/win-user-installed-npm-cli-path)
-[![devDependency Status](https://img.shields.io/david/dev/shinnn/win-user-installed-npm-cli-path.svg?label=devDeps)](https://david-dm.org/shinnn/win-user-installed-npm-cli-path#info=devDependencies)
+[![Dependency Status](https://david-dm.org/shinnn/win-user-installed-npm-cli-path.svg)](https://david-dm.org/shinnn/win-user-installed-npm-cli-path)
+[![devDependency Status](https://david-dm.org/shinnn/win-user-installed-npm-cli-path/dev-status.svg)](https://david-dm.org/shinnn/win-user-installed-npm-cli-path#info=devDependencies)
 
 Resolve the path of [`npm-cli.js`][npm-cli] included in [user-installed](https://docs.npmjs.com/getting-started/installing-node#updating-npm) [npm](https://www.npmjs.com/) on [Windows](https://www.microsoft.com/windows)
 
