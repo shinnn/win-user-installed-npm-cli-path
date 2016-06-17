@@ -1,15 +1,15 @@
 'use strict';
 
-var path = require('path');
+const path = require('path');
 
-var test = require('tape');
-var winUserInstalledNpmCliPath = require('..');
+const test = require('tape');
+const winUserInstalledNpmCliPath = require('..');
 
-test('winUserInstalledNpmCliPath() when npm is not installed with `npm install -g npm`', function(t) {
+test('winUserInstalledNpmCliPath() when npm is not installed with `npm install -g npm`', t => {
   t.plan(3);
 
   winUserInstalledNpmCliPath()
-  .then(t.fail, function(err) {
+  .then(t.fail, err => {
     t.strictEqual(
       err.code,
       'ENOENT',

@@ -1,12 +1,11 @@
 'use strict';
 
-var path = require('path');
+const path = require('path');
 
-var test = require('tape');
-var semver = require('semver');
-var winUserInstalledNpmCliPath = require('..');
+const test = require('tape');
+const winUserInstalledNpmCliPath = require('..');
 
-test('winUserInstalledNpmCliPath() when npm is installed with `npm install -g npm`', function(t) {
+test('winUserInstalledNpmCliPath() when npm is installed with `npm install -g npm`', t => {
   t.plan(3);
 
   t.strictEqual(
@@ -16,23 +15,7 @@ test('winUserInstalledNpmCliPath() when npm is installed with `npm install -g np
   );
 
   winUserInstalledNpmCliPath()
-  .then(function(result) {
-    if (semver.lt(process.env.npm_version, '2.0.0')) {
-      t.strictEqual(
-        result,
-        path.join(process.env['ProgramFiles(x86)'], 'nodejs\\node_modules\\npm\\bin\\npm-cli.js'),
-      'should resolve the `npm-cli.js` path.'
-      );
-
-      t.notEqual(
-        require(path.join(result, '..\\..\\package.json')).version,
-        process.env.npm_version,
-        'should not resolve the path from where the npm installed with an ancient version exists.'
-      );
-
-      return;
-    }
-
+  .then(result => {
     t.strictEqual(
       result,
       path.join(process.env.APPDATA, 'npm\\node_modules\\npm\\bin\\npm-cli.js'),

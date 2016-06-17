@@ -1,27 +1,23 @@
 'use strict';
 
-var path = require('path');
+const path = require('path');
 
-var fs = require('graceful-fs');
-var pify = require('pify');
-var PinkiePromise = require('pinkie-promise');
-var test = require('tape');
-var winUserInstalledNpmCliPath = require('..');
+const fs = require('graceful-fs');
+const pify = require('pify');
+const test = require('tape');
+const winUserInstalledNpmCliPath = require('..');
 
-var fsP = pify(fs, PinkiePromise);
+const fsP = pify(fs);
 
-test('winUserInstalledNpmCliPath() when a non-file entity exists in the expected path', function(t) {
+test('winUserInstalledNpmCliPath() when a non-file entity exists in the expected path', t => {
   t.plan(1);
 
-  var cliPath = path.resolve(__dirname, '..\\tmp\\node_modules\\npm\\bin\\npm-cli.js');
+  const cliPath = path.resolve(__dirname, '..\\tmp\\node_modules\\npm\\bin\\npm-cli.js');
 
   fsP.unlink(cliPath)
-  .then(function() {
-    return fsP.mkdir(cliPath);
-  }).then(function() {
-    return winUserInstalledNpmCliPath();
-  })
-  .then(t.fail, function(err) {
+  .then(() => fsP.mkdir(cliPath))
+  .then(() => winUserInstalledNpmCliPath())
+  .then(t.fail, err => {
     t.strictEqual(
       err.message,
       cliPath + ' exists, but it\'s not a file.',

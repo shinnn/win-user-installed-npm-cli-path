@@ -4,19 +4,18 @@
 */
 'use strict';
 
-var exec = require('child_process').exec;
-var path = require('path');
+const exec = require('child_process').exec;
+const path = require('path');
 
-var fs = require('graceful-fs');
-var PinkiePromise = require('pinkie-promise');
+const fs = require('graceful-fs');
 
 if (process.platform !== 'win32') {
   module.exports = function winUserInstalledNpmCliPath() {
-    return PinkiePromise.reject(new Error('Only supported in Windows.'));
+    return Promise.reject(new Error('Only supported in Windows.'));
   };
 } else {
-  var getNpmPrefix = new PinkiePromise(function(resolve, reject) {
-    // https://github.com/npm/npm/blob/v3.4.0/bin/npm.cmd
+  const getNpmPrefix = new Promise(function executor(resolve, reject) {
+    // https://github.com/npm/npm/blob/v3.10.0/bin/npm.cmd
     // https://github.com/npm/npm/pull/9089
     exec('npm config get prefix -g', function execCallback(execErr, stdout) {
       if (execErr) {
@@ -30,8 +29,8 @@ if (process.platform !== 'win32') {
 
   module.exports = function winUserInstalledNpmCliPath() {
     return getNpmPrefix.then(function(npmPrefix) {
-      return new PinkiePromise(function executor(resolve, reject) {
-        var expectedPath = path.join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
+      return new Promise(function executor(resolve, reject) {
+        const expectedPath = path.join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
 
         fs.lstat(expectedPath, function lstatCallback(lstatErr, stats) {
           if (lstatErr) {

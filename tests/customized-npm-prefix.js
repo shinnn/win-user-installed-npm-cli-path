@@ -1,15 +1,15 @@
 'use strict';
 
-var path = require('path');
+const path = require('path');
 
-var test = require('tape');
-var winUserInstalledNpmCliPath = require('..');
+const test = require('tape');
+const winUserInstalledNpmCliPath = require('..');
 
-test('winUserInstalledNpmCliPath() with non-default npm `prefix`', function(t) {
+test('winUserInstalledNpmCliPath() with non-default npm `prefix`', t => {
   t.plan(2);
 
   winUserInstalledNpmCliPath()
-  .then(function(result) {
+  .then(result => {
     t.strictEqual(
       result,
       path.resolve(__dirname, '..\\tmp\\node_modules\\npm\\bin\\npm-cli.js'),

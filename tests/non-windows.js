@@ -1,14 +1,14 @@
 'use strict';
 
-var pretendPlatform = require('pretend-platform');
-var test = require('tape');
+const pretendPlatform = require('pretend-platform');
+const test = require('tape');
 
 pretendPlatform('darwin');
 
-test('winUserInstalledNpmCliPath() on non-Windows environment', function(t) {
+test('winUserInstalledNpmCliPath() on non-Windows environment', t => {
   t.plan(2);
 
-  var winUserInstalledNpmCliPath = require('..');
+  const winUserInstalledNpmCliPath = require('..');
 
   t.strictEqual(
     winUserInstalledNpmCliPath.name,
@@ -16,7 +16,7 @@ test('winUserInstalledNpmCliPath() on non-Windows environment', function(t) {
     'should have a function name.'
   );
 
-  winUserInstalledNpmCliPath().then(t.fail, function(err) {
+  winUserInstalledNpmCliPath().then(t.fail, err => {
     t.strictEqual(err.message, 'Only supported in Windows.', 'should fail immediately.');
   });
 });
