@@ -39,8 +39,6 @@ It resolves the path of [`npm-cli.js`][npm-cli] included in the user-installed [
 
 It uses global [`prefix`](https://docs.npmjs.com/files/folders#prefix-configuration) [config](https://docs.npmjs.com/misc/config#prefix) as a base path for searching npm CLI location.
 
-*Use [npm](https://github.com/npm/npm/releases) 2.x or newer to avoid [the `prefix` bug in ancient versions](https://github.com/npm/npm/wiki/Troubleshooting#a-brief-note-on-the-built-in-windows-configuration).*
-
 ```javascript
 // npm config set prefix tmp --global
 
@@ -58,7 +56,7 @@ Use [real-executable-path](https://github.com/shinnn/real-executable-path) inste
 ```javascript
 const realExecutablePath = require('real-executable-path');
 
-realExecutablePath('npm').then(cliPath) => {
+realExecutablePath('npm').then(cliPath => {
   cliPath; //=> '/usr/local/lib/node_modules/npm/bin/npm-cli.js'
 });
 ```
