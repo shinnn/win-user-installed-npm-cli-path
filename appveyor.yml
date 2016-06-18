@@ -5,8 +5,8 @@ environment:
   matrix:
     -
       nodejs_version: Stable
-      npm_version: '3.10.0'
-      another_npm_version: '3.9.6'
+      npm_version: '3.10.1'
+      another_npm_version: '3.10.0'
       COVERALLS_REPO_TOKEN:
         secure: KeN37NXWmMhEHWGb0U4ZbtVf+CgmcdLts/HmKS6yRqDI6WNflrSyjgXwXy3HR2Oe
       COVERALLS_SERVICE_NAME: AppVeyor
@@ -15,15 +15,15 @@ environment:
       COVERALLS_GIT_COMMIT: '%APPVEYOR_REPO_COMMIT%'
     -
       nodejs_version: LTS
-      npm_version: '2.15.7'
-      another_npm_version: '2.15.5'
+      npm_version: '2.15.8'
+      another_npm_version: '2.15.7'
 install:
   - ps: Install-Product node $env:nodejs_version
   - 'npm --version # Original npm version'
   - npm install --global npm@%npm_version%
   - set PATH=%APPDATA%\npm;%PATH%
   - 'npm --version # User-installed npm version'
-  - npm uninstall --save-dev @shinnn/eslint-config-node-legacy eslint
+  - npm uninstall --save-dev @shinnn/eslint-config-node eslint
   - npm install
 matrix:
   fast_finish: true
