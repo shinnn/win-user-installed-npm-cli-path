@@ -5,7 +5,7 @@
   "repository": "shinnn/win-user-installed-npm-cli-path",
   "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
   "scripts": {
-    "pretest": "eslint --config @shinnn/node index.js tests",
+    "pretest": "eslint --fix --format=codeframe index.js tests",
     "test": "istanbul cover --dir=coverage/0 tests/non-windows.js && istanbul cover --dir=coverage/1 tests/no-npm.js && istanbul report html",
     "coveralls": "istanbul report lcov && istanbul-coveralls"
   },
@@ -29,15 +29,18 @@
     "asynchronously"
   ],
   "dependencies": {
-    "graceful-fs": "^4.1.4"
+    "graceful-fs": "^4.1.11"
   },
   "devDependencies": {
-    "@shinnn/eslint-config-node": "^2.0.0",
-    "eslint": "^2.13.0",
-    "istanbul": "^0.4.3",
+    "@shinnn/eslint-config-node": "^3.0.0",
+    "eslint": "^3.19.0",
+    "istanbul": "^0.4.5",
     "istanbul-coveralls": "^1.0.3",
-    "pify": "^2.3.0",
-    "pretend-platform": "^1.0.1",
-    "tape": "^4.5.1"
+    "pify": "^3.0.0",
+    "pretend-platform": "^2.0.0",
+    "tape": "^4.6.3"
+  },
+  "eslintConfig": {
+    "extends": "@shinnn/node"
   }
 }
