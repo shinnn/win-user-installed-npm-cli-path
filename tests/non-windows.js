@@ -16,7 +16,7 @@ test('winUserInstalledNpmCliPath() on non-Windows environment', t => {
     'should have a function name.'
   );
 
-  winUserInstalledNpmCliPath().then(t.fail, err => {
-    t.strictEqual(err.message, 'Only supported in Windows.', 'should fail immediately.');
+  winUserInstalledNpmCliPath().then(t.fail, ({message}) => {
+    t.strictEqual(message, 'Only supported in Windows.', 'should fail immediately.');
   });
 });

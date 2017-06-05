@@ -28,12 +28,10 @@
     "asynchronous",
     "asynchronously"
   ],
-  "dependencies": {
-    "graceful-fs": "^4.1.11"
-  },
   "devDependencies": {
     "@shinnn/eslint-config-node": "^3.0.0",
     "eslint": "^3.19.0",
+    "graceful-fs": "^4.1.11",
     "istanbul": "^0.4.5",
     "istanbul-coveralls": "^1.0.3",
     "pify": "^3.0.0",
