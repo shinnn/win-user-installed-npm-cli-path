@@ -6,8 +6,8 @@ environment:
   matrix:
     -
       nodejs_version: Stable
-      npm_version: '3.10.1'
-      another_npm_version: '3.10.0'
+      npm_version: '5.0.3'
+      another_npm_version: '5.0.2'
       COVERALLS_REPO_TOKEN:
         secure: KeN37NXWmMhEHWGb0U4ZbtVf+CgmcdLts/HmKS6yRqDI6WNflrSyjgXwXy3HR2Oe
       COVERALLS_SERVICE_NAME: AppVeyor
@@ -16,8 +16,8 @@ environment:
       COVERALLS_GIT_COMMIT: '%APPVEYOR_REPO_COMMIT%'
     -
       nodejs_version: LTS
-      npm_version: '2.15.8'
-      another_npm_version: '2.15.7'
+      npm_version: '4.6.1'
+      another_npm_version: '4.6.0'
 install:
   - ps: Install-Product node $env:nodejs_version
   - 'npm --version # Original npm version'
