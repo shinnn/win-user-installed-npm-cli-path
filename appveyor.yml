@@ -24,7 +24,6 @@ install:
   - npm install --global npm@%npm_version%
   - set PATH=%APPDATA%\npm;%PATH%
   - 'npm --version # User-installed npm version'
-  - npm uninstall --save-dev @shinnn/eslint-config-node eslint
   - npm install
 matrix:
   fast_finish: true
