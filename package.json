@@ -9,7 +9,7 @@
     "test": "istanbul cover --dir=coverage/0 tests/non-windows.js && istanbul cover --dir=coverage/1 tests/no-npm.js && istanbul report html",
     "coveralls": "istanbul report lcov && istanbul-coveralls"
   },
-  "license": "MIT",
+  "license": "ISC",
   "files": [
     "index.js"
   ],

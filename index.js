@@ -1,7 +1,3 @@
-/*!
- * win-user-installed-npm-cli-path | MIT (c) Shinnosuke Watanabe
- * https://github.com/shinnn/win-user-installed-npm-cli-path
-*/
 'use strict';
 
 const exec = require('child_process').exec;
@@ -14,7 +10,7 @@ if (process.platform !== 'win32') {
   };
 } else {
   const getNpmPrefix = new Promise(function executor(resolve, reject) {
-    // https://github.com/npm/npm/blob/v5.0.2/bin/npm.cmd
+    // https://github.com/npm/npm/blob/v5.5.1/bin/npm.cmd
     // https://github.com/npm/npm/pull/9089
     exec('npm config get prefix -g', function execCallback(err, stdout) {
       if (err) {
