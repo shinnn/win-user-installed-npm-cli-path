@@ -10,14 +10,16 @@ Resolve the path of [`npm-cli.js`][npm-cli] included in [user-installed](https:/
 ```javascript
 const winUserInstalledNpmCliPath = require('win-user-installed-npm-cli-path');
 
-winUserInstalledNpmCliPath().then(cliPath => {
-  cliPath; //=> 'C:\\Users\\me\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js'
-});
+(async () => {
+  const cliPath = await winUserInstalledNpmCliPath();
+  //=> 'C:\\Users\\me\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js'
+  });
+})();
 ```
 
 ## Installation
 
-[Use npm.](https://docs.npmjs.com/cli/install)
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
 
 ```
 npm install win-user-installed-npm-cli-path
@@ -31,20 +33,19 @@ const winUserInstalledNpmCliPath = require('win-user-installed-npm-cli-path');
 
 ### winUserInstalledNpmCliPath()
 
-Return: [`Promise`](http://www.ecma-international.org/ecma-262/6.0/#sec-promise-constructor) instance
+Return: `Promise<string>`
 
-It resolves the path of [`npm-cli.js`][npm-cli] included in the user-installed [`npm`](https://github.com/npm/npm) CLI on Windows. *"User-installed"* means that it has been installed with [`npm install -g npm`](https://docs.npmjs.com/misc/faq#how-do-i-update-npm) command by the user, and it might be located on the path different from where the default Node-bundled npm has been installed.
+It resolves the path of [`npm-cli.js`][npm-cli] included in the user-installed [`npm` CLI](https://github.com/npm/npm) on Windows. *"User-installed"* means that it has been installed with [`npm install --global npm`](https://docs.npmjs.com/getting-started/installing-node#updating-npm) command by the user, and it might be located on the path different from where the default Node.js-bundled npm has been installed.
 
 It uses global [`prefix`](https://docs.npmjs.com/files/folders#prefix-configuration) [config](https://docs.npmjs.com/misc/config#prefix) as a base path for searching npm CLI location.
 
 ```javascript
 // npm config set prefix tmp --global
 
-const winUserInstalledNpmCliPath = require('win-user-installed-npm-cli-path');
-
-winUserInstalledNpmCliPath().then(cliPath => {
-  cliPath; //=> 'C:\projects\your_project\tmp\node_modules\npm\bin\npm-cli.js'
-});
+(async () => {
+  await winUserInstalledNpmCliPath();
+  //=> 'C:\projects\your_project\tmp\node_modules\npm\bin\npm-cli.js'
+})();
 ```
 
 ## For [POSIX](http://standards.ieee.org/develop/wg/POSIX.html)
@@ -54,9 +55,10 @@ Use [real-executable-path](https://github.com/shinnn/real-executable-path) inste
 ```javascript
 const realExecutablePath = require('real-executable-path');
 
-realExecutablePath('npm').then(cliPath => {
-  cliPath; //=> '/usr/local/lib/node_modules/npm/bin/npm-cli.js'
-});
+(async () => {
+  await realExecutablePath('npm');
+  //=> '/usr/local/lib/node_modules/npm/bin/npm-cli.js'
+})();
 ```
 
 ## License
