@@ -18,7 +18,7 @@ test('winUserInstalledNpmCliPath() when npm is not installed', t => {
     t.ok(code, 'should be rejected with a command error.');
 
     t.ok(
-      cmd.includes('npm config get prefix'),
+      cmd.includes('npm prefix -g'),
       'should be rejected while running `npm config` command.'
     );
   });

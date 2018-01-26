@@ -10,9 +10,9 @@ if (process.platform !== 'win32') {
   };
 } else {
   const getNpmPrefix = new Promise(function executor(resolve, reject) {
-    // https://github.com/npm/npm/blob/v5.5.1/bin/npm.cmd
+    // https://github.com/npm/npm/blob/v5.6.0/bin/npm.cmd
     // https://github.com/npm/npm/pull/9089
-    exec('npm config get prefix -g', function execCallback(err, stdout) {
+    exec('npm prefix -g', (err, stdout) => {
       if (err) {
         reject(err);
         return;
