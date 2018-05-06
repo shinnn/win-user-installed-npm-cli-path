@@ -5,18 +5,15 @@ const test = require('tape');
 
 pretendPlatform('darwin');
 
-test('winUserInstalledNpmCliPath() on non-Windows environment', t => {
-  t.plan(2);
+test('winUserInstalledNpmCliPath() on non-Windows environment', async t => {
+	const winUserInstalledNpmCliPath = require('..');
 
-  const winUserInstalledNpmCliPath = require('..');
+	try {
+		await winUserInstalledNpmCliPath();
+		t.fail('Unexpectedly succeeded.');
+	} catch ({message}) {
+		t.equal(message, 'Only supported in Windows.', 'should fail immediately.');
+	}
 
-  t.strictEqual(
-    winUserInstalledNpmCliPath.name,
-    'winUserInstalledNpmCliPath',
-    'should have a function name.'
-  );
-
-  winUserInstalledNpmCliPath().then(t.fail, ({message}) => {
-    t.strictEqual(message, 'Only supported in Windows.', 'should fail immediately.');
-  });
+	t.end();
 });

@@ -9,17 +9,20 @@ pretendPlatform('win32');
 
 process.env.PATH = resolve('f/o/o/b/a/r');
 
-test('winUserInstalledNpmCliPath() when npm is not installed', t => {
-  t.plan(2);
+test('winUserInstalledNpmCliPath() when npm is not installed', async t => {
+	const winUserInstalledNpmCliPath = require('..');
 
-  const winUserInstalledNpmCliPath = require('..');
+	try {
+		await winUserInstalledNpmCliPath();
+		t.fail('Unexpectedly succeeded.');
+	} catch ({cmd, code}) {
+		t.ok(code, 'should be rejected with a command error.');
 
-  winUserInstalledNpmCliPath().then(t.fail, ({cmd, code}) => {
-    t.ok(code, 'should be rejected with a command error.');
+		t.ok(
+			cmd.includes('npm prefix -g'),
+			'should be rejected while running `npm config` command.'
+		);
+	}
 
-    t.ok(
-      cmd.includes('npm prefix -g'),
-      'should be rejected while running `npm config` command.'
-    );
-  });
+	t.end();
 });

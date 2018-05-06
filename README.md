@@ -63,6 +63,6 @@ const realExecutablePath = require('real-executable-path');
 
 ## License
 
-[ISC License](./LICENSE) © 2017 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2017 - 2018 Shinnosuke Watanabe
 
 [npm-cli]: https://github.com/npm/npm/blob/master/bin/npm-cli.js
