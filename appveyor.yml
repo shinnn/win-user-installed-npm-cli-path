@@ -6,8 +6,8 @@ environment:
   matrix:
     -
       nodejs_version: Stable
-      npm_version: '5.0.3'
-      another_npm_version: '5.0.2'
+      npm_version: '6.0.0'
+      another_npm_version: '6.0.0-next.2'
       COVERALLS_REPO_TOKEN:
         secure: KeN37NXWmMhEHWGb0U4ZbtVf+CgmcdLts/HmKS6yRqDI6WNflrSyjgXwXy3HR2Oe
       COVERALLS_SERVICE_NAME: AppVeyor
@@ -16,15 +16,15 @@ environment:
       COVERALLS_GIT_COMMIT: '%APPVEYOR_REPO_COMMIT%'
     -
       nodejs_version: LTS
-      npm_version: '4.6.1'
-      another_npm_version: '4.6.0'
+      npm_version: '5.8.0'
+      another_npm_version: '5.8.0-next.0'
 install:
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node $env:nodejs_version x64
   - 'npm --version # Original npm version'
   - npm install --global npm@%npm_version%
   - set PATH=%APPDATA%\npm;%PATH%
   - 'npm --version # User-installed npm version'
-  - npm install
+  - npm ci
 matrix:
   fast_finish: true
 build: off
@@ -40,5 +40,4 @@ test_script:
   - node node_modules\istanbul\lib\cli.js cover --dir=cov4 tests\customized-npm-prefix.js
   - node node_modules\istanbul\lib\cli.js cover --dir=cov5 tests\broken-cli-file.js
 on_success:
-  - ps: If ($env:COVERALLS_REPO_TOKEN) {Invoke-Expression 'npm run-script coveralls'}
-cache: node_modules -> package.json
+  - ps: If ($env:COVERALLS_REPO_TOKEN) {npx istanbul report lcov; Get-Content coverage\lcov.info | npx --quiet coveralls}
