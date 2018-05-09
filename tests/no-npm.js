@@ -13,6 +13,28 @@ test('winUserInstalledNpmCliPath() when npm is not installed', async t => {
 	const winUserInstalledNpmCliPath = require('..');
 
 	try {
+		await winUserInstalledNpmCliPath(1);
+		t.fail('Unexpectedly succeeded.');
+	} catch ({message}) {
+		t.equal(
+			message,
+			'Expected no arguments, but got 1 argument.',
+			'should be rejected when it takes an argument.'
+		);
+	}
+
+	try {
+		await winUserInstalledNpmCliPath(1, 2);
+		t.fail('Unexpectedly succeeded.');
+	} catch ({message}) {
+		t.equal(
+			message,
+			'Expected no arguments, but got 2 arguments.',
+			'should be rejected when it takes arguments.'
+		);
+	}
+
+	try {
 		await winUserInstalledNpmCliPath();
 		t.fail('Unexpectedly succeeded.');
 	} catch ({cmd, code}) {

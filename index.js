@@ -1,15 +1,15 @@
 'use strict';
 
-const exec = require('child_process').exec;
-const lstat = require('fs').lstat;
-const path = require('path');
+const {exec} = require('child_process');
+const {lstat} = require('fs');
+const {join} = require('path');
 
 if (process.platform !== 'win32') {
 	module.exports = function winUserInstalledNpmCliPath() {
 		return Promise.reject(new Error('Only supported in Windows.'));
 	};
 } else {
-	const getNpmPrefix = new Promise(function executor(resolve, reject) {
+	const getNpmPrefix = new Promise((resolve, reject) => {
 		// https://github.com/npm/npm/blob/v5.6.0/bin/npm.cmd
 		// https://github.com/npm/npm/pull/9089
 		exec('npm prefix -g', (err, stdout) => {
@@ -22,11 +22,19 @@ if (process.platform !== 'win32') {
 		});
 	});
 
-	module.exports = function winUserInstalledNpmCliPath() {
-		return getNpmPrefix.then(npmPrefix => new Promise(function executor(resolve, reject) {
-			const expectedPath = path.join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
+	module.exports = function winUserInstalledNpmCliPath(...args) {
+		const argLen = args.length;
 
-			lstat(expectedPath, function lstatCallback(err, stat) {
+		if (argLen !== 0) {
+			return Promise.reject(new RangeError(`Expected no arguments, but got ${argLen} argument${
+				argLen === 1 ? '' : 's'
+			}.`));
+		}
+
+		return getNpmPrefix.then(npmPrefix => new Promise((resolve, reject) => {
+			const expectedPath = join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
+
+			lstat(expectedPath, (err, stat) => {
 				if (err) {
 					reject(err);
 					return;
