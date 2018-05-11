@@ -5,8 +5,8 @@ const {lstat} = require('fs');
 const {join} = require('path');
 
 if (process.platform !== 'win32') {
-	module.exports = function winUserInstalledNpmCliPath() {
-		return Promise.reject(new Error('Only supported in Windows.'));
+	module.exports = async function winUserInstalledNpmCliPath() {
+		throw new Error('Only supported in Windows.');
 	};
 } else {
 	const getNpmPrefix = new Promise((resolve, reject) => {
@@ -22,16 +22,18 @@ if (process.platform !== 'win32') {
 		});
 	});
 
-	module.exports = function winUserInstalledNpmCliPath(...args) {
+	module.exports = async function winUserInstalledNpmCliPath(...args) {
 		const argLen = args.length;
 
 		if (argLen !== 0) {
-			return Promise.reject(new RangeError(`Expected no arguments, but got ${argLen} argument${
+			throw new RangeError(`Expected no arguments, but got ${argLen} argument${
 				argLen === 1 ? '' : 's'
-			}.`));
+			}.`);
 		}
 
-		return getNpmPrefix.then(npmPrefix => new Promise((resolve, reject) => {
+		const npmPrefix = await getNpmPrefix;
+
+		return new Promise((resolve, reject) => {
 			const expectedPath = join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
 
 			lstat(expectedPath, (err, stat) => {
@@ -47,6 +49,6 @@ if (process.platform !== 'win32') {
 
 				resolve(expectedPath);
 			});
-		}));
+		});
 	};
 }
