@@ -12,7 +12,7 @@ test('winUserInstalledNpmCliPath() on non-Windows environment', async t => {
 		await winUserInstalledNpmCliPath();
 		t.fail('Unexpectedly succeeded.');
 	} catch ({message}) {
-		t.equal(message, 'Only supported in Windows.', 'should fail immediately.');
+		t.equal(message, 'Only supported on Windows.', 'should fail immediately.');
 	}
 
 	t.end();

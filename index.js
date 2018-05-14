@@ -7,7 +7,7 @@ const {promisify} = require('util');
 
 if (process.platform !== 'win32') {
 	module.exports = async function winUserInstalledNpmCliPath() {
-		throw new Error('Only supported in Windows.');
+		throw new Error('Only supported on Windows.');
 	};
 } else {
 	const getNpmPrefix = (async () => (await promisify(exec)('npm prefix -g')).stdout.trim())();
@@ -23,7 +23,7 @@ if (process.platform !== 'win32') {
 
 		const npmPrefix = await getNpmPrefix;
 		const expectedPath = join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
-		const stat = promisify(lstat)(expectedPath);
+		const stat = await promisify(lstat)(expectedPath);
 
 		if (!stat.isFile()) {
 			throw new Error(`${expectedPath} exists, but it's not a file.`);
