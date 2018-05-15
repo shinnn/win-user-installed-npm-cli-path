@@ -1,6 +1,6 @@
 {
 	"name": "win-user-installed-npm-cli-path",
-	"version": "3.0.0-1",
+	"version": "3.0.0",
 	"description": "Resolve the path of `npm-cli.js` included in the user-installed npm on Windows",
 	"repository": "shinnn/win-user-installed-npm-cli-path",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
@@ -28,7 +28,7 @@
 		"@shinnn/eslint-config-node": "^5.0.0",
 		"eslint": "^4.19.1",
 		"graceful-fs": "^4.1.11",
-		"nyc": "^11.7.3",
+		"nyc": "^11.8.0",
 		"pretend-platform": "^2.0.0",
 		"tape": "^4.9.0"
 	},
