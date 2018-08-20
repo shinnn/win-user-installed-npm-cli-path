@@ -5,7 +5,7 @@
 	"repository": "shinnn/win-user-installed-npm-cli-path",
 	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
 	"scripts": {
-		"pretest": "eslint --fix --format=codeframe index.js tests",
+		"pretest": "eslint .",
 		"test": "nyc --clean node tests/non-windows.js && nyc node tests/no-npm.js && nyc report --reporter=html --reporter=text"
 	},
 	"license": "ISC",
@@ -25,12 +25,11 @@
 		"async"
 	],
 	"devDependencies": {
-		"@shinnn/eslint-config-node": "^5.0.0",
-		"eslint": "^4.19.1",
-		"graceful-fs": "^4.1.11",
-		"nyc": "^11.8.0",
+		"@shinnn/eslint-config-node": "^6.0.0",
+		"eslint": "^5.3.0",
+		"nyc": "^13.0.1",
 		"pretend-platform": "^2.0.0",
-		"tape": "^4.9.0"
+		"tape": "^4.9.1"
 	},
 	"eslintConfig": {
 		"extends": "@shinnn/node"

@@ -19,7 +19,7 @@ test('winUserInstalledNpmCliPath() when npm is not installed with `npm install -
 		);
 
 		t.ok(
-			/lstat .*\\tmp\\node_modules\\npm\\bin\\npm-cli\.js/.test(message),
+			/lstat .*\\tmp\\node_modules\\npm\\bin\\npm-cli\.js/u.test(message),
 			'should be rejected while calling `lstat`.'
 		);
 	}
