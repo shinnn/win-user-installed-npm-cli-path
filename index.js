@@ -22,7 +22,7 @@ if (process.platform !== 'win32') {
 			}.`);
 		}
 
-		const npmPrefix = (await promisifiedExecFile('npm prefix -g', {shell: true})).stdout.trim();
+		const npmPrefix = (await promisifiedExecFile('npm', ['prefix', '-g'], {shell: true})).stdout.trim();
 		const expectedPath = join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
 
 		if (!(await promisifiedLstat(expectedPath)).isFile()) {
