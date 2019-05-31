@@ -1,6 +1,6 @@
 {
 	"name": "win-user-installed-npm-cli-path",
-	"version": "3.0.1",
+	"version": "4.0.0",
 	"description": "Resolve the path of `npm-cli.js` included in the user-installed npm on Windows",
 	"repository": "shinnn/win-user-installed-npm-cli-path",
 	"author": "Watanabe Shinnosuke (https://github.com/shinnn)",
