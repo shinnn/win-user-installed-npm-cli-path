@@ -6,12 +6,11 @@ if (process.platform !== 'win32') {
 	};
 } else {
 	const {execFile} = require('child_process');
-	const {lstat} = require('fs');
 	const {join} = require('path');
+	const {lstat} = require('fs').promises;
 	const {promisify} = require('util');
 
 	const promisifiedExecFile = promisify(execFile);
-	const promisifiedLstat = promisify(lstat);
 
 	module.exports = async function winUserInstalledNpmCliPath(...args) {
 		const argLen = args.length;
@@ -25,7 +24,7 @@ if (process.platform !== 'win32') {
 		const npmPrefix = (await promisifiedExecFile('npm', ['prefix', '-g'], {shell: true})).stdout.trim();
 		const expectedPath = join(npmPrefix, 'node_modules\\npm\\bin\\npm-cli.js');
 
-		if (!(await promisifiedLstat(expectedPath)).isFile()) {
+		if (!(await lstat(expectedPath)).isFile()) {
 			throw new Error(`${expectedPath} exists, but it's not a file.`);
 		}
 

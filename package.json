@@ -3,7 +3,7 @@
 	"version": "3.0.1",
 	"description": "Resolve the path of `npm-cli.js` included in the user-installed npm on Windows",
 	"repository": "shinnn/win-user-installed-npm-cli-path",
-	"author": "Shinnosuke Watanabe (https://github.com/shinnn)",
+	"author": "Watanabe Shinnosuke (https://github.com/shinnn)",
 	"scripts": {
 		"pretest": "eslint .",
 		"test": "nyc --clean node tests/non-windows.js && nyc node tests/no-npm.js && nyc report"

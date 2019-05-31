@@ -1,7 +1,7 @@
 # win-user-installed-npm-cli-path
 
 [![npm version](https://img.shields.io/npm/v/win-user-installed-npm-cli-path.svg)](https://www.npmjs.com/package/win-user-installed-npm-cli-path)
-[![Build Status](https://travis-ci.org/shinnn/win-user-installed-npm-cli-path.svg?branch=master)](https://travis-ci.org/shinnn/win-user-installed-npm-cli-path)
+[![Build Status](https://travis-ci.com/shinnn/win-user-installed-npm-cli-path.svg?branch=master)](https://travis-ci.com/shinnn/win-user-installed-npm-cli-path)
 [![Build status](https://ci.appveyor.com/api/projects/status/2sp4jxe2rp48lnk2/branch/master?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/win-user-installed-npm-cli-path/branch/master)
 [![Coverage Status](https://img.shields.io/coveralls/shinnn/win-user-installed-npm-cli-path.svg)](https://coveralls.io/github/shinnn/win-user-installed-npm-cli-path)
 
@@ -19,7 +19,7 @@ const winUserInstalledNpmCliPath = require('win-user-installed-npm-cli-path');
 
 ## Installation
 
-[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/getting-started/what-is-npm).
+[Use](https://docs.npmjs.com/cli/install) [npm](https://docs.npmjs.com/about-npm/).
 
 ```
 npm install win-user-installed-npm-cli-path
@@ -63,6 +63,6 @@ const realExecutablePath = require('real-executable-path');
 
 ## License
 
-[ISC License](./LICENSE) © 2017 - 2018 Shinnosuke Watanabe
+[ISC License](./LICENSE) © 2017 - 2019 Watanabe Shinnosuke
 
 [npm-cli]: https://github.com/npm/npm/blob/master/bin/npm-cli.js
